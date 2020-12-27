@@ -24,38 +24,6 @@ function maximizeImg(event) {
   document.body.style.overflow = 'hidden';
   setActiveLink(target);
 }
-function goRight({ key }) {
-  if (key === 'ArrowRight') {
-    console.log(`Entering ${key}`);
-    let elemInFocus = imageSources.find(
-      elem => elem.original === lightbox__image.src,
-    );
-    console.log(elemInFocus);
-    let index = imageSources.indexOf(elemInFocus);
-    console.log(index);
-    if (index === imageSources.length - 1) {
-      lightbox__image.src = imageSources[0].original;
-    } else {
-      lightbox__image.src = imageSources[index + 1].original;
-    }
-  }
-}
-function goLeft({ key }) {
-  if (key === 'ArrowLeft') {
-    console.log(`Entering ${key}`);
-    let elemInFocus = imageSources.find(
-      elem => elem.original === lightbox__image.src,
-    );
-    console.log(elemInFocus);
-    let index = imageSources.indexOf(elemInFocus);
-    console.log(index);
-    if (index === 0) {
-      lightbox__image.src = imageSources[imageSources.length - 1].original;
-    } else {
-      lightbox__image.src = imageSources[index - 1].original;
-    }
-  }
-}
 function setActiveLink(target) {
   lightbox__image.src = target.dataset.source;
   lightbox__image.alt = target.alt;
@@ -70,6 +38,42 @@ function closeAction() {
 function escapeFunction({ key }) {
   if (key === 'Escape') {
     closeAction();
+  }
+}
+function goRight({ key }) {
+  if (key === 'ArrowRight') {
+    console.log(`Entering ${key}`);
+    let elemInFocus = imageSources.find(
+      elem => elem.original === lightbox__image.src,
+    );
+    console.log(elemInFocus);
+    let index = imageSources.indexOf(elemInFocus);
+    console.log(index);
+    if (index === imageSources.length - 1) {
+      lightbox__image.src = imageSources[0].original;
+      lightbox__image.alt = imageSources[0].description;
+    } else {
+      lightbox__image.src = imageSources[index + 1].original;
+      lightbox__image.alt = imageSources[index + 1].description;
+    }
+  }
+}
+function goLeft({ key }) {
+  if (key === 'ArrowLeft') {
+    console.log(`Entering ${key}`);
+    let elemInFocus = imageSources.find(
+      elem => elem.original === lightbox__image.src,
+    );
+    console.log(elemInFocus);
+    let index = imageSources.indexOf(elemInFocus);
+    console.log(index);
+    if (index === 0) {
+      lightbox__image.src = imageSources[imageSources.length - 1].original;
+      lightbox__image.alt = imageSources[imageSources.length - 1].description;
+    } else {
+      lightbox__image.src = imageSources[index - 1].original;
+      lightbox__image.alt = imageSources[index - 1].description;
+    }
   }
 }
 
