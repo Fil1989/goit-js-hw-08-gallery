@@ -12,7 +12,8 @@ allList.addEventListener('click', maximizeImg);
 lightbox__button.addEventListener('click', closeAction);
 lightbox__overlay.addEventListener('click', closeAction);
 window.addEventListener('keydown', escapeFunction);
-// window.addEventListener('keydown', goRight);
+window.addEventListener('keydown', goRight);
+window.addEventListener('keydown', goLeft);
 
 function maximizeImg(event) {
   event.preventDefault();
@@ -23,21 +24,38 @@ function maximizeImg(event) {
   document.body.style.overflow = 'hidden';
   setActiveLink(target);
 }
-// function goRight({ key }) {
-//   if (key === 'ArrowRight') {
-//     console.log(`Entering ${key}`);
-//     goToNextPicture();
-//   }
-// }
-// function goToNextPicture() {
-//   let elemInFocus = imageSources.find(elem => {
-//     elem.original === lightbox__image.src;
-//   });
-//   console.log(elemInFocus);
-//   let index = imageSources.indexOf(elemInFocus);
-//   console.log(index);
-//   lightbox__image.src = imageSources[index + 2].original;
-// }
+function goRight({ key }) {
+  if (key === 'ArrowRight') {
+    console.log(`Entering ${key}`);
+    let elemInFocus = imageSources.find(
+      elem => elem.original === lightbox__image.src,
+    );
+    console.log(elemInFocus);
+    let index = imageSources.indexOf(elemInFocus);
+    console.log(index);
+    if (index === imageSources.length - 1) {
+      lightbox__image.src = imageSources[0].original;
+    } else {
+      lightbox__image.src = imageSources[index + 1].original;
+    }
+  }
+}
+function goLeft({ key }) {
+  if (key === 'ArrowLeft') {
+    console.log(`Entering ${key}`);
+    let elemInFocus = imageSources.find(
+      elem => elem.original === lightbox__image.src,
+    );
+    console.log(elemInFocus);
+    let index = imageSources.indexOf(elemInFocus);
+    console.log(index);
+    if (index === 0) {
+      lightbox__image.src = imageSources[imageSources.length - 1].original;
+    } else {
+      lightbox__image.src = imageSources[index - 1].original;
+    }
+  }
+}
 function setActiveLink(target) {
   lightbox__image.src = target.dataset.source;
   lightbox__image.alt = target.alt;
